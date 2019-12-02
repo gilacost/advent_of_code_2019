@@ -18,17 +18,11 @@ defmodule DayOne do
   spacecraft?
   """
 
-  def calculate_total_fuel(fuel_calculator \\ &DayOne.calculate_fuel/1 ) do
-    "modules_mass.txt"
+  def calculate_total_fuel(fuel_calculator \\ &DayOne.calculate_fuel/1) do
+    "day_one_input"
     |> Helpers.get_file_content()
-    |> String.split("\n")
-    |> Enum.reduce(0, fn x, acc ->
-      mass =
-        case Integer.parse(x) do
-          {mass, ""} -> mass
-          :error -> nil
-        end
-
+    |> Helpers.split_and_parse("\n")
+    |> Enum.reduce(0, fn mass, acc ->
       fuel_calculator.(mass) + acc
     end)
   end
@@ -62,10 +56,10 @@ defmodule DayOne do
     |> case do
       integer when integer > 0 ->
         calculate_fuel_recursively(integer, acc + integer)
+
       _ ->
         acc
     end
-
   end
 
   @doc """
