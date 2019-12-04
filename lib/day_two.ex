@@ -15,10 +15,17 @@ defmodule DayTwo do
   value 2.
 
   # Part two
+
   With terminology out of the way, we're ready to proceed. To complete the
   gravity assist, you need to determine what pair of inputs produces the output
   19690720.
+
+  The inputs should still be provided to the program by replacing the values at
+  addresses 1 and 2, just like before. In this program, the value placed in
+  address 1 is called the noun, and the value placed in address 2 is called the
+  verb. Each of the two input values will be between 0 and 99, inclusive.
   """
+
   @input "day_two_input"
          |> Helpers.get_file_content()
          |> Helpers.split_and_parse(",")
