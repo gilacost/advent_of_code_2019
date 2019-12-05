@@ -1,5 +1,5 @@
 defmodule AdventOfCode.Day02 do
-  @input "day_two_input"
+  @input "day_02_input"
          |> Helpers.get_file_content()
          |> Helpers.split_and_parse(",")
 
