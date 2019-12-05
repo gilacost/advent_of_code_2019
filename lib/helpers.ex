@@ -19,6 +19,10 @@ defmodule Helpers do
     String.split(string, splitter)
   end
 
+  def parse_int(list) when is_list(list) do
+    Enum.map(list, &parse_int(&1))
+  end
+
   def parse_int(string) do
     case Integer.parse(string) do
       {int, ""} -> int
