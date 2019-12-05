@@ -1,6 +1,12 @@
-defmodule DayFour do
-  @input "278384-824795"
+defmodule AdventOfCode.Day04 do
+  @input "day_04_input"
+         |> Helpers.get_file_content()
+         |> String.replace("\n", "")
          |> Helpers.split_and_parse("-")
+
+  def part1(), do: password_possibilities()
+
+  def part2(), do: password_possibilities(true)
 
   def password_possibilities(one_double? \\ false, input_list \\ @input),
     do: password_possibilities_list(one_double?, input_list) |> length
@@ -48,7 +54,7 @@ defmodule DayFour do
           {:unknown, digit_list}
       end
 
-    {state, Integer.undigits(digit_list)}
+    {state, join_digits(digit_list)}
   end
 
   def group_by_digit(digit_list) do

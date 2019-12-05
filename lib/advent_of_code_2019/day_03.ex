@@ -1,9 +1,13 @@
-defmodule DayThree do
-  @input "day_three_input"
+defmodule AdventOfCode.Day03 do
+  @input "day_03_input"
          |> Helpers.get_file_content()
          |> String.split("\n")
          |> List.delete_at(-1)
          |> Enum.map(&String.split(&1, ","))
+
+  def part1(), do: closest_intersection()
+
+  def part2(), do: shortest_path_to_intersection()
 
   def closest_intersection(input_list \\ @input) do
     input_list
