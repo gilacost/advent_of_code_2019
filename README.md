@@ -1,21 +1,20 @@
-# AdventOfCode19
+# Advent Of Code 19
 
-**TODO: Add description**
+My solutions for advent of code 2019: [adventofcode19](https://adventofcode.com/2019/).
 
-## Installation
+## Installation requiremets
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `advent_of_code_19` to your list of dependencies in `mix.exs`:
+Run asdf install for installing elixir and erlang.
+
+```bash
+asdf install
+
+```
+## Tests
+
+Github action has been configured to be ran after each commit pushed. If
+you want to run the test locally run:
 
 ```elixir
-def deps do
-  [
-    {:advent_of_code_19, "~> 0.1.0"}
-  ]
-end
+mix test
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/advent_of_code_19](https://hexdocs.pm/advent_of_code_19).
-
