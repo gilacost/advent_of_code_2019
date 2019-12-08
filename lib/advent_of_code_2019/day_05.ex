@@ -22,7 +22,7 @@ defmodule AdventOfCode.Day05 do
 
   def proxy_instruction(input_list, op_index, input) do
     [modes, opcode] = modes_and_opcode(input_list, op_index)
-
+    # get value of the index is immediate
     case opcode do
       "01" ->
         params = parameters(input_list, modes, op_index)
@@ -70,7 +70,7 @@ defmodule AdventOfCode.Day05 do
       input_list
       |> Enum.at(index)
       |> Integer.to_string()
-      |> String.pad_leading(5, "0")
+      |> String.pad_leading(4, "0")
       |> String.codepoints()
 
     opcode = "#{opcode_1}#{opcode_2}"
