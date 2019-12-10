@@ -25,36 +25,62 @@ defmodule AdventOfCode.Day05 do
     # get value of the index is immediate
     case opcode do
       "01" ->
-        params = parameters(input_list, modes, op_index)
-        run_instruction(:operators, input_list, params, &Kernel.+/2)
+        # operators
+        # three params
+        {[p1, p2, p3], op_index} = parameters(input_list, modes, op_index)
+        input_list = List.replace_at(input_list, p3, p1 + p2)
+        {:cont, {input_list, op_index + 4}}
 
       "02" ->
-        params = parameters(input_list, modes, op_index)
-        run_instruction(:operators, input_list, params, &Kernel.*/2)
+        # operators
+        # three params
+        {[p1, p2, p3], op_index} = parameters(input_list, modes, op_index)
+        input_list = List.replace_at(input_list, p3, p1 * p2)
+        {:cont, {input_list, op_index + 4}}
 
       "03" ->
-        params = parameters(input_list, modes, op_index)
-        run_instruction(:input, input_list, params, input)
+        # input
+        # one param
+        {[p1, _p2, _p3], op_index} = parameters(input_list, modes, op_index)
+        input_list = List.replace_at(input_list, p1, input)
+        {:cont, {input_list, op_index + 2}}
 
       "04" ->
-        params = parameters(input_list, modes, op_index)
-        run_instruction(:output, input_list, params)
+        # output
+        # one param
+        {[p1, _p2, _p3], op_index} = parameters(input_list, modes, op_index)
+        IO.inspect(p1, label: "OUTPUT")
+        {:cont, {input_list, op_index + 2}}
 
       "05" ->
-        params = parameters(input_list, modes, op_index)
-        run_instruction(:jump_if, input_list, params, true)
+        # jump if true
+        # two params
+        {[p1, p2, _p3], op_index} = parameters(input_list, modes, op_index)
+        index = jump_if(true, p1, p2, op_index)
+        {:cont, {input_list, index}}
 
       "06" ->
-        params = parameters(input_list, modes, op_index)
-        run_instruction(:jump_if, input_list, params, false)
+        # jump if false
+        # two params
+        {[p1, p2, _p3], op_index} = parameters(input_list, modes, op_index)
+        index = jump_if(false, p1, p2, op_index)
+        {:cont, {input_list, index}}
 
       "07" ->
-        params = parameters(input_list, modes, op_index)
-        run_instruction(:less_than, input_list, params)
+        # less than
+        # three params
+        {[p1, p2, p3], op_index} = parameters(input_list, modes, op_index)
+        value = if p1 < p2, do: 1, else: 0
+        input_list = List.replace_at(input_list, p3, value)
+        {:cont, {input_list, op_index + 4}}
 
       "08" ->
-        params = parameters(input_list, modes, op_index)
-        run_instruction(:equals, input_list, params)
+        # equal than
+        # three params
+        {[p1, p2, p3], op_index} = parameters(input_list, modes, op_index)
+        value = if p1 == p2, do: 1, else: 0
+        input_list = List.replace_at(input_list, p3, value)
+        {:cont, {input_list, op_index + 4}}
 
       "99" ->
         {:halt, {input_list, 0}}
@@ -70,7 +96,7 @@ defmodule AdventOfCode.Day05 do
       input_list
       |> Enum.at(index)
       |> Integer.to_string()
-      |> String.pad_leading(4, "0")
+      |> String.pad_leading(5, "0")
       |> String.codepoints()
 
     opcode = "#{opcode_1}#{opcode_2}"
@@ -91,39 +117,6 @@ defmodule AdventOfCode.Day05 do
       ],
       op_index
     }
-  end
-
-  def run_instruction(:jump_if, input_list, {[p1, p2, _p3], op_index}, bool) do
-    index = jump_if(bool, p1, p2, op_index)
-    {:cont, {input_list, index}}
-  end
-
-  def run_instruction(:input, input_list, {[p1, _p2, _p3], op_index}, input) do
-    input_list = List.replace_at(input_list, p1, input)
-    {:cont, {input_list, op_index + 2}}
-  end
-
-  def run_instruction(:operators, input_list, {[p1, p2, p3], op_index}, op) do
-    input_list = List.replace_at(input_list, p3, op.(p1, p2))
-    {:cont, {input_list, op_index + 4}}
-  end
-
-  def run_instruction(:less_than, input_list, {[p1, p2, p3], op_index}) do
-    value = if p1 < p2, do: 1, else: 0
-    input_list = List.replace_at(input_list, p3, value)
-    {:cont, {input_list, op_index + 4}}
-  end
-
-  def run_instruction(:equals, input_list, {[p1, p2, p3], op_index}) do
-    value = if p1 == p2, do: 1, else: 0
-
-    input_list = List.replace_at(input_list, p3, value)
-    {:cont, {input_list, op_index + 4}}
-  end
-
-  def run_instruction(:output, input_list, {[p1, _p1, _p2], op_index}) do
-    IO.inspect(p1, label: "OUTPUT")
-    {:cont, {input_list, op_index + 2}}
   end
 
   defp jump_if(true, p1, p2, _index) when p1 != 0, do: p2
