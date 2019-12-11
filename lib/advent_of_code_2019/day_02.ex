@@ -1,6 +1,7 @@
 defmodule AdventOfCode.Day02 do
   @input "day_02_input"
          |> Helpers.get_file_content()
+         |> String.trim("\n")
          |> Helpers.split_and_parse(",")
 
   def part1(), do: int_program(replace_noun_and_verb())
