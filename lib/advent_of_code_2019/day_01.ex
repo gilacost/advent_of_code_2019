@@ -1,4 +1,4 @@
-defmodule AdventOfCode.Day01 do
+defmodule AdventOfCode2019.Day01 do
   def part1(fuel_calculator \\ &calculate_fuel/1) do
     "day_01_input"
     |> Helpers.get_file_content()

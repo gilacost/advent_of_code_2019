@@ -1,7 +1,7 @@
-defmodule AdventOfCode.Day02Test do
+defmodule AdventOfCode2019.Day02Test do
   use ExUnit.Case
 
-  import AdventOfCode.Day02
+  import AdventOfCode2019.Day02
 
   describe "part1" do
     test "1,0,0,0,99 becomes 2,0,0,0,99 (1 + 1 = 2)." do

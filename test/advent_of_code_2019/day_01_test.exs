@@ -1,7 +1,7 @@
-defmodule AdventOfCode.Day01Test do
+defmodule AdventOfCode2019.Day01Test do
   use ExUnit.Case
 
-  import AdventOfCode.Day01
+  import AdventOfCode2019.Day01
 
   describe "part1" do
     test "For a mass of 12, divide by 3 and round down to get 4, then subtract 2 to get 2." do

@@ -1,7 +1,7 @@
-defmodule AdventOfCode.Day05Test do
+defmodule AdventOfCode2019.Day05Test do
   use ExUnit.Case
 
-  import AdventOfCode.Day05
+  import AdventOfCode2019.Day05
 
   import ExUnit.CaptureIO
 
@@ -25,7 +25,7 @@ defmodule AdventOfCode.Day05Test do
 
   describe "part2" do
     test " noun=31 and verb=46, the answer would be 19690720." do
-      assert AdventOfCode.Day02.find_for_output(19_690_720) == {31, 46, 3146}
+      assert AdventOfCode2019.Day02.find_for_output(19_690_720) == {31, 46, 3146}
     end
   end
 

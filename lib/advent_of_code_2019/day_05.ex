@@ -1,4 +1,4 @@
-defmodule AdventOfCode.Day05 do
+defmodule AdventOfCode2019.Day05 do
   @input "day_05_input"
          |> Helpers.get_file_content()
          |> String.trim("\n")
